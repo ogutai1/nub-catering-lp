@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUB Catering — オフィスに、熱狂とカルチャーを。</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #FAFAF8;
+  color: #1A1A1A;
+  overflow-x: hidden;
+}
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { text-decoration: none; color: inherit; }
+
+/* ============================================================
+   VARIABLES
+   ============================================================ */
+:root {
+  --orange: #E85A1A;
+  --black: #1A1A1A;
+  --dark-green: #1E3A2F;
+  --ivory: #F5F3EE;
+  --mid-gray: #6B6B6B;
+  --light-gray: #E0DED8;
+  --white: #FFFFFF;
+  --section-pad: 100px 24px;
+  --max-w: 1100px;
+}
+
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+.section-label {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: var(--black);
+}
+.section-title--white { color: var(--white); }
+.section-sub {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: var(--mid-gray);
+  margin-top: 12px;
+  line-height: 1.8;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(26,26,26,.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: background .3s;
+}
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+.nav-logo-text {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: var(--white);
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.7);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--orange); }
+.nav-cta {
+  background: var(--orange);
+  color: var(--white) !important;
+  padding: 10px 20px;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em;
+  transition: background .2s !important;
+}
+.nav-cta:hover { background: #c44d15 !important; }
+.nav-hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; transition: .3s; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--black);
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .55;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+  padding-top: 64px;
+  text-align: center;
+}
+.hero-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  padding: 6px 14px;
+  margin-bottom: 24px;
+}
+.hero-title {
+  font-size: clamp(48px, 8vw, 96px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.0;
+  letter-spacing: -.02em;
+  margin-bottom: 16px;
+}
+.hero-title span { color: var(--orange); }
+.hero-subtitle {
+  font-size: clamp(14px, 2vw, 18px);
+  color: rgba(255,255,255,.8);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  max-width: 560px;
+}
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+.btn-primary {
+  display: inline-block;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 16px 36px;
+  transition: background .2s, transform .2s;
+}
+.btn-primary:hover { background: #c44d15; transform: translateY(-2px); }
+.btn-outline {
+  display: inline-block;
+  border: 1px solid rgba(255,255,255,.5);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 16px 36px;
+  transition: border-color .2s, background .2s;
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,.5);
+  font-size: 10px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  animation: bounce 2s infinite;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,.3);
+}
+@keyframes bounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
+}
+
+/* ============================================================
+   CONCEPT
+   ============================================================ */
+#concept {
+  background: var(--ivory);
+  padding: 100px 0;
+  overflow: hidden;
+}
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.concept-text {}
+.concept-copy {
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--black);
+  margin: 16px 0 28px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--orange);
+}
+.concept-body {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  line-height: 2.2;
+  color: #2C2C2C;
+}
+.concept-body p { margin-bottom: 20px; }
+.concept-photo {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+}
+.concept-photo::before {
+  content: '';
+  position: absolute;
+  top: -20px; left: -20px;
+  width: 50%; height: 50%;
+  border: 3px solid var(--orange);
+  z-index: 0;
+}
+.concept-photo img { position: relative; z-index: 1; }
+
+/* ============================================================
+   MENU
+   ============================================================ */
+#menu {
+  background: var(--white);
+  padding: 100px 0;
+}
+.menu-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.menu-card {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  transition: transform .3s, box-shadow .3s;
+}
+.menu-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.12);
+}
+.menu-card-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--ivory);
+}
+.menu-card-img img { transition: transform .6s; }
+.menu-card:hover .menu-card-img img { transform: scale(1.06); }
+.menu-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  background: var(--orange);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+}
+.menu-badge.green { background: var(--dark-green); }
+.menu-badge.black { background: var(--black); }
+.menu-card-body {
+  padding: 28px 24px 32px;
+  background: var(--ivory);
+}
+.menu-en {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 6px;
+}
+.menu-ja {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--black);
+  margin-bottom: 12px;
+}
+.menu-copy {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.menu-desc {
+  font-size: 13px;
+  color: var(--mid-gray);
+  line-height: 1.9;
+}
+.menu-note {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 12px;
+  color: var(--mid-gray);
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+/* ============================================================
+   SCENE (利用シーン)
+   ============================================================ */
+#scene {
+  background: var(--black);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+#scene::before {
+  content: 'SCENE';
+  position: absolute;
+  top: 50%;
+  left: -40px;
+  transform: translateY(-50%) rotate(-90deg);
+  font-size: 120px;
+  font-weight: 900;
+  color: rgba(255,255,255,.03);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.scene-header {
+  text-align: center;
+  margin-bottom: 60px;
+  max-width: var(--max-w);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+.scene-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.scene-card {
+  position: relative;
+  padding: 48px 40px;
+  background: #222;
+  overflow: hidden;
+  cursor: default;
+  transition: background .3s;
+}
+.scene-card:hover { background: #2a2a2a; }
+.scene-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--orange);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .3s;
+}
+.scene-card:hover::before { transform: scaleY(1); }
+.scene-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.scene-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 16px;
+  letter-spacing: .05em;
+}
+.scene-copy {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.scene-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   TRUST
+   ============================================================ */
+#trust {
+  background: var(--dark-green);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+.trust-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.trust-copy {
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 900;
+  color: var(--white);
+  margin: 16px 0 12px;
+  line-height: 1.2;
+}
+.trust-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  font-family: 'Noto Serif JP', serif;
+}
+.trust-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.trust-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  padding: 40px 32px;
+  transition: background .3s;
+}
+.trust-card:hover { background: rgba(255,255,255,.10); }
+.trust-icon {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.trust-card-title {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.trust-card-text {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.9;
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+#gallery {
+  background: var(--black);
+  padding: 0;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 240px 240px;
+}
+.gallery-item {
+  overflow: hidden;
+  position: relative;
+}
+.gallery-item:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.gallery-item img {
+  transition: transform .6s;
+}
+.gallery-item:hover img { transform: scale(1.08); }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,26,26,.3);
+  transition: background .3s;
+}
+.gallery-item:hover .gallery-overlay { background: rgba(26,26,26,.1); }
+
+/* ============================================================
+   OWNER
+   ============================================================ */
+#owner {
+  background: var(--ivory);
+  padding: 100px 0;
+  overflow: hidden;
+}
+.owner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.owner-photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+.owner-photo::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 50%;
+  height: 50%;
+  border: 3px solid var(--dark-green);
+  z-index: 0;
+}
+.owner-photo img { position: relative; z-index: 1; }
+.owner-text {}
+.owner-label { margin-bottom: 16px; }
+.owner-name {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--black);
+  margin-bottom: 8px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--dark-green);
+}
+.owner-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark-green);
+  letter-spacing: .08em;
+  margin-bottom: 24px;
+}
+.owner-message {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  line-height: 2.3;
+  color: #2C2C2C;
+}
+@media (max-width: 900px) {
+  .owner-grid { grid-template-columns: 1fr; gap: 40px; }
+  .owner-photo { aspect-ratio: 16/9; order: -1; }
+  .owner-photo::after { display: none; }
+}
+
+/* ============================================================
+   FLOW
+   ============================================================ */
+#flow {
+  background: var(--ivory);
+  padding: 100px 0;
+}
+.flow-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+.flow-steps {
+  display: flex;
+  gap: 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.flow-step {
+  flex: 1;
+  position: relative;
+  padding: 36px 24px;
+  text-align: center;
+}
+.flow-step:nth-child(odd) { background: var(--orange); }
+.flow-step:nth-child(even) { background: var(--black); }
+.flow-step::after {
+  content: '▶';
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255,255,255,.4);
+  font-size: 16px;
+  z-index: 1;
+}
+.flow-step:last-child::after { display: none; }
+.flow-num {
+  font-size: 32px;
+  font-weight: 900;
+  color: rgba(255,255,255,.3);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.flow-title {
+  font-size: 14px;
+  font-weight: 900;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.flow-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.7;
+}
+.flow-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 12px;
+  color: var(--mid-gray);
+}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+#contact {
+  background: var(--orange);
+  padding: 100px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+#contact::before {
+  content: 'NUB';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 300px;
+  font-weight: 900;
+  color: rgba(255,255,255,.06);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.contact-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.contact-title {
+  font-size: clamp(28px, 4.5vw, 52px);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+  letter-spacing: -.02em;
+  white-space: nowrap;
+}
+.contact-sub {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 15px;
+  color: rgba(255,255,255,.85);
+  line-height: 2;
+  margin-bottom: 48px;
+}
+.contact-form {
+  background: var(--white);
+  padding: 48px 40px;
+  text-align: left;
+}
+.form-row {
+  margin-bottom: 20px;
+}
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+.form-label span { color: var(--orange); }
+.form-input {
+  width: 100%;
+  border: 1px solid var(--light-gray);
+  padding: 12px 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  color: var(--black);
+  background: var(--white);
+  outline: none;
+  transition: border-color .2s;
+}
+.form-input:focus { border-color: var(--orange); }
+.form-textarea {
+  height: 120px;
+  resize: vertical;
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit {
+  width: 100%;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  padding: 18px;
+  border: none;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: var(--dark-green); transform: translateY(-2px); }
+.contact-dm {
+  margin-top: 24px;
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+}
+.contact-dm a { color: var(--white); text-decoration: underline; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--black);
+  color: rgba(255,255,255,.4);
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.footer-logo {
+  margin-bottom: 16px;
+}
+.footer-logo img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}
+.footer-logo-text {
+  font-size: 20px;
+  font-weight: 900;
+  color: rgba(255,255,255,.5);
+  letter-spacing: .1em;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin: 16px 0;
+}
+.footer-links a {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--orange); }
+.footer-copy { font-size: 11px; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .concept-grid { grid-template-columns: 1fr; gap: 40px; }
+  .concept-photo { order: -1; aspect-ratio: 16/9; }
+  .concept-photo::before { display: none; }
+  .menu-grid { grid-template-columns: 1fr; gap: 16px; }
+  .scene-grid { grid-template-columns: 1fr; }
+  .trust-cards { grid-template-columns: 1fr; gap: 16px; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+  .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+  .flow-steps { flex-direction: column; }
+  .flow-step::after { display: none; }
+  .contact-form { padding: 28px 20px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: 44px; }
+  .hero-btns { flex-direction: column; }
+  .btn-primary, .btn-outline { text-align: center; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV
+     ============================================================ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <img src="https://drive.google.com/thumbnail?id=11yO-hBUOpuflRypLZmKgsrPeXKf-tqc_&sz=w200" alt="NUB Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="nav-logo-text" style="display:none;">NUB</span>
+    </a>
+    <div class="nav-links">
+      <a href="#concept">Concept</a>
+      <a href="#menu">Menu</a>
+      <a href="#scene">Scene</a>
+      <a href="#trust">Trust</a>
+      <a href="#flow">Flow</a>
+      <a href="#contact" class="nav-cta">ケータリングを相談する</a>
+    </div>
+    <div class="nav-hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" style="display:none;position:fixed;top:64px;left:0;right:0;background:rgba(26,26,26,.98);z-index:999;padding:24px;border-top:1px solid rgba(255,255,255,.08);">
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <a href="#concept" onclick="toggleMenu()" style="color:rgba(255,255,255,.7);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Concept</a>
+    <a href="#menu" onclick="toggleMenu()" style="color:rgba(255,255,255,.7);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Menu</a>
+    <a href="#scene" onclick="toggleMenu()" style="color:rgba(255,255,255,.7);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Scene</a>
+    <a href="#trust" onclick="toggleMenu()" style="color:rgba(255,255,255,.7);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Trust</a>
+    <a href="#flow" onclick="toggleMenu()" style="color:rgba(255,255,255,.7);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;">Flow</a>
+    <a href="#contact" onclick="toggleMenu()" style="background:var(--orange);color:#fff;font-size:14px;font-weight:700;padding:14px 20px;text-align:center;letter-spacing:.1em;text-transform:uppercase;">ケータリングを相談する</a>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="https://drive.google.com/thumbnail?id=1IOWQMTZxTJVOufI3YL7jL2dH7X3HKKu5&sz=w1600" alt="NUB Catering Hero">
+  </div>
+  <div class="hero-content">
+    <div class="hero-tag reveal">NUB Catering — Since Machida</div>
+    <h1 class="hero-title reveal reveal-delay-1">
+      昼だって、<br><span>本気で食え。</span>
+    </h1>
+    <p class="hero-subtitle reveal reveal-delay-2">
+      夜ご飯には選ぶのに、ランチは「適当でいいか」になっていないか。<br>NUBのブリトーは片手で食べられる。でも、つくりは本気だ。
+    </p>
+    <div class="hero-btns reveal reveal-delay-3">
+      <a href="#contact" class="btn-primary">ケータリングを相談する</a>
+      <a href="#menu" class="btn-outline">メニューを見る</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ============================================================
+     CONCEPT
+     ============================================================ -->
+<section id="concept">
+  <div class="concept-grid">
+    <div class="concept-text reveal">
+      <div class="section-label">Concept</div>
+      <h2 class="concept-copy">オフィスに、<br>熱狂とカルチャーを。</h2>
+      <div class="concept-body">
+        <p>「ランチ、どこでもいいか」——そんな空気を変えたい。</p>
+        <p>NUBは、町田発のテクスメクス（Tex-Mex）レストラン。スケボーと音楽、ストリートカルチャーが混ざり合うあの空間で、アスリートもクリエイターも、飯を食って元気をもらっていく。</p>
+        <p>そのエネルギーを、オフィスに届けることにした。チームが沸く昼。打ち上げが盛り上がる夜。ただの食事じゃなく、「体験」として記憶される食卓。それが、NUB Cateringの約束だ。</p>
+      </div>
+    </div>
+    <div class="concept-photo reveal reveal-delay-2">
+      <img src="https://drive.google.com/thumbnail?id=1SNUcTBATImJst08ZOAytLwZUslNQUbX1&sz=w800" alt="NUB Concept">
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MENU
+     ============================================================ -->
+<section id="menu">
+  <div class="container">
+    <div class="menu-header reveal">
+      <div class="section-label">Menu & Style</div>
+      <h2 class="section-title">旨い、映える、記憶に残る。</h2>
+      <p class="section-sub">ただの食事ではなく、パッケージを含めた「体験」として届けます。</p>
+    </div>
+    <div class="menu-grid">
+      <!-- Chicken Over Rice -->
+      <div class="menu-card reveal reveal-delay-1">
+        <div class="menu-card-img">
+          <img src="https://drive.google.com/thumbnail?id=1Q4ffiZ-NdvSxz-cTbVKNlQrUDCRJSdik&sz=w800" alt="Chicken Over Rice">
+          <div class="menu-badge black">★ 日替わりスペシャル</div>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-en">Chicken Over Rice</div>
+          <div class="menu-ja">チキンオーバーライス</div>
+          <div class="menu-copy">「これ、なに？」と言わせるボリューム。</div>
+          <div class="menu-desc">スパイスで丁寧に仕込んだジューシーなチキンがライスの上に、これでもかと積み重なる。ホワイトソースとハリッサの2色がけがオフィスでも思わず写真を撮らせる。</div>
+        </div>
+      </div>
+      <!-- Tacos -->
+      <div class="menu-card reveal reveal-delay-2">
+        <div class="menu-card-img">
+          <img src="https://drive.google.com/thumbnail?id=1jE_UNtNbZwJMBWYIy-5c0pcPFG3zgC3Y&sz=w800" alt="Tacos">
+          <div class="menu-badge">★ パーティ向け</div>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-en">Tacos</div>
+          <div class="menu-ja">タコス</div>
+          <div class="menu-copy">手で食べる喜び、忘れてた？</div>
+          <div class="menu-desc">コーントルティーヤに、肉・野菜・サルサを自分流に詰めて食べる。立食パーティでも絵になる、NUBのシグネチャー・スタイル。</div>
+        </div>
+      </div>
+      <!-- Burrito -->
+      <div class="menu-card reveal reveal-delay-3">
+        <div class="menu-card-img">
+          <img src="https://drive.google.com/thumbnail?id=1joLfjBwOiZApYc9bYx_VT9a8FnYGCrEz&sz=w800" alt="Burrito">
+          <div class="menu-badge green">★ デリバリー向け</div>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-en">Burrito</div>
+          <div class="menu-ja">ブリトー</div>
+          <div class="menu-copy">一本で、腹も心も満タンに。</div>
+          <div class="menu-desc">ライス・チキン・豆・チーズをぎゅっと包んだ本場仕込みのブリトー。個包装で手渡しできるからランチボックスとして最適。</div>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note reveal">※ すべてのメニューは人数・予算に合わせてカスタマイズ可能。お気軽にご相談ください。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCENE
+     ============================================================ -->
+<section id="scene">
+  <div class="scene-header reveal">
+    <div class="section-label" style="color:var(--orange);">Usage Scene</div>
+    <h2 class="section-title section-title--white">こんな時に使われています</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,.5);">担当者が「これを上司に提案したら喜ばれそう」と思わせる、シーン別の提案。</p>
+  </div>
+  <div class="scene-grid container" style="padding:0 24px;">
+    <div class="scene-card reveal reveal-delay-1">
+      <div class="scene-num">01</div>
+      <div class="scene-title">💻 IT企業のランチミーティング</div>
+      <div class="scene-copy">「またUberか」を<br>卒業する日。</div>
+      <div class="scene-desc">デスクに並ぶNUBのボックスを見て、チームの顔がほころぶ。ランチミーティングが、気づけばチームビルディングになっていた。</div>
+    </div>
+    <div class="scene-card reveal reveal-delay-2">
+      <div class="scene-num">02</div>
+      <div class="scene-title">🎨 クリエイティブチームの打ち上げ</div>
+      <div class="scene-copy">フィニッシュの熱量を、<br>食卓にも。</div>
+      <div class="scene-desc">プロジェクト完遂の夜。タコスを囲んで笑う顔を見れば、次のプロジェクトへのエネルギーがすでに充填されている。</div>
+    </div>
+    <div class="scene-card reveal reveal-delay-3">
+      <div class="scene-num">03</div>
+      <div class="scene-title">🎉 社内パーティー・歓送迎会</div>
+      <div class="scene-copy">「センスがいい幹事」に<br>なれる唯一の方法。</div>
+      <div class="scene-desc">NUBのケータリングを選んだだけで、幹事のあなたの株が上がる。ストリートカルチャーを知っている、そんな大人に見える。</div>
+    </div>
+    <div class="scene-card reveal reveal-delay-4">
+      <div class="scene-num">04</div>
+      <div class="scene-title">🏋️ スポーツチーム・合宿・遠征</div>
+      <div class="scene-copy">アスリートが選んだ、<br>本物のパワーフード。</div>
+      <div class="scene-desc">NUBには常連のスポーツ選手がいる。カロリーとタンパク質、そして旨さを全部満たすメニューを、チームの力に変えてほしい。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY
+     ============================================================ -->
+<div id="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1Mu2meBTk5Dpv98IfqIR8dIh9NhjpEIg7&sz=w1200" alt="">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1B5NqVKECQmV-iqg6YmNG5gAmva1oAdQd&sz=w800" alt="">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1KNHzt3HvTxqYtu6zSJeixFGV1l3E8hLd&sz=w800" alt="">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1WZFDGn-bdIXkyhVa7iQJ_l9pDuJA_wav&sz=w800" alt="">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://drive.google.com/thumbnail?id=1NIEW_x51gSZHE1uHv80ltZ5CKKvxnUNw&sz=w800" alt="">
+      <div class="gallery-overlay"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     TRUST
+     ============================================================ -->
+<section id="trust">
+  <div class="container">
+    <div class="trust-header reveal">
+      <div class="section-label" style="color:rgba(255,255,255,.4);">Quality & Trust</div>
+      <h2 class="trust-copy">本物だから、アスリートが通い続ける。</h2>
+      <p class="trust-sub">町田の地元に愛され続けて9年。NUBは、強さを食べる場所だ。</p>
+    </div>
+    <div class="trust-cards">
+      <div class="trust-card reveal reveal-delay-1">
+        <div class="trust-icon">🏆</div>
+        <div class="trust-card-title">スポーツ選手御用達</div>
+        <div class="trust-card-text">プロ・アマ問わず多くのアスリートが来店。「試合前後に食べに来る」常連が絶えない。パワーフードとしての信頼は折り紙付き。</div>
+      </div>
+      <div class="trust-card reveal reveal-delay-2">
+        <div class="trust-icon">📍</div>
+        <div class="trust-card-title">町田の地元で愛される実店舗</div>
+        <div class="trust-card-text">地域に根ざした実店舗があるからこそ、食材の質・味・量のコントロールができる。「顔が見えるお店」の安心感。</div>
+      </div>
+      <div class="trust-card reveal reveal-delay-3">
+        <div class="trust-icon">📦</div>
+        <div class="trust-card-title">パッケージまでこだわる</div>
+        <div class="trust-card-text">クラフト紙×NUBロゴのオリジナルボックスは食卓に出した瞬間から気分が上がる。食前からもう「体験」が始まっている。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OWNER
+     ============================================================ -->
+<section id="owner">
+  <div class="owner-grid">
+    <div class="owner-photo reveal">
+      <img src="https://drive.google.com/thumbnail?id=1sq3Iew1sb8klol9gUxI2sn7b85CBMJS_&sz=w800" alt="NUB オーナー">
+    </div>
+    <div class="owner-text reveal reveal-delay-2">
+      <div class="section-label owner-label">Owner's Voice</div>
+      <h2 class="owner-name">「昼飯に、手を抜かない」<br>それがNUBのすべてだ。</h2>
+      <p class="owner-title">NUB Tex-Mex Style / オーナー</p>
+      <p class="owner-message">夜は行くお店を決める。でも昼はなんとなく、手近なものを食べる——そういう日が続いていた。それが悔しかった。<br><br>ブリトーは片手で食べられる。5分で食べ終わる。だからこそ、中身は一切妥協しなかった。チキンは一晩漬け込む。豆は毎朝炊く。ソースはその日に仕込む。<br><br>速く食べられることと、本物であることは、矛盾しない。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FLOW
+     ============================================================ -->
+<section id="flow">
+  <div class="container">
+    <div class="flow-header reveal">
+      <div class="section-label">Plan & Flow</div>
+      <h2 class="section-title">相談から当日まで、全部サポートします。</h2>
+      <p class="section-sub">メニュー選びから配送・セッティングまで、NUBがまとめてお任せください。</p>
+    </div>
+    <div class="flow-steps reveal reveal-delay-1">
+      <div class="flow-step">
+        <div class="flow-num">01</div>
+        <div class="flow-title">お問い合わせ</div>
+        <div class="flow-desc">フォームまたはInstagram DMからご連絡ください</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">02</div>
+        <div class="flow-title">ヒアリング</div>
+        <div class="flow-desc">人数・予算・日程・シーンをお聞きします</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">03</div>
+        <div class="flow-title">お見積もり</div>
+        <div class="flow-desc">2〜3営業日以内にご提案・見積もりをお送り</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">04</div>
+        <div class="flow-title">ご注文確定</div>
+        <div class="flow-desc">内容確認後、正式にご注文を確定します</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">05</div>
+        <div class="flow-title">当日お届け</div>
+        <div class="flow-desc">指定の時間・場所に。セッティングもご相談可</div>
+      </div>
+    </div>
+    <p class="flow-note reveal">※ ご注文の目安：3日前までにご連絡ください（大口は1週間前）　※ 最小注文人数：10名〜</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title reveal">まず、話してみませんか。</h2>
+    <p class="contact-sub reveal reveal-delay-1">
+      正式なご注文でなくても構いません。<br>
+      「こんなことできる？」という気軽な相談から、NUBはお待ちしています。
+    </p>
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label">お名前 <span>*</span></label>
+          <input type="text" class="form-input" placeholder="山田 太郎">
+        </div>
+        <div class="form-row">
+          <label class="form-label">会社名</label>
+          <input type="text" class="form-input" placeholder="株式会社◯◯">
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">メールアドレス <span>*</span></label>
+        <input type="email" class="form-input" placeholder="example@company.com">
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label class="form-label">ご利用人数</label>
+          <input type="text" class="form-input" placeholder="例：30名">
+        </div>
+        <div class="form-row">
+          <label class="form-label">ご希望日</label>
+          <input type="text" class="form-input" placeholder="例：2025年3月15日">
+        </div>
+      </div>
+      <div class="form-row">
+        <label class="form-label">ご相談内容</label>
+        <textarea class="form-input form-textarea" placeholder="ご予算、ご利用シーン、気になることなど、お気軽にどうぞ。"></textarea>
+      </div>
+      <button class="form-submit">送信する →</button>
+    </div>
+    <p class="contact-dm">またはInstagramから直接 → <a href="https://instagram.com/nub_machida" target="_blank">@nub_machida</a></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://drive.google.com/thumbnail?id=11yO-hBUOpuflRypLZmKgsrPeXKf-tqc_&sz=w200" alt="NUB Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <span class="footer-logo-text" style="display:none;">NUB</span>
+  </div>
+  <div class="footer-links">
+    <a href="#concept">Concept</a>
+    <a href="#menu">Menu</a>
+    <a href="#scene">Scene</a>
+    <a href="#trust">Trust</a>
+    <a href="#flow">Flow</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p class="footer-copy">© 2025 NUB Tex-Mex Style. All rights reserved.</p>
+</footer>
+
+<script>
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (window.scrollY > 80) {
+    nav.style.background = 'rgba(26,26,26,1)';
+  } else {
+    nav.style.background = 'rgba(26,26,26,.96)';
+  }
+});
+
+// Mobile menu
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Close mobile menu on link click
+document.querySelectorAll('#mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('mobile-menu').style.display = 'none';
+  });
+});
+</script>
+</body>
+</html>
